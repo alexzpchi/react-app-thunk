@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { authSlice } from "../store/slices";
 import { FormTypes } from "../utils/enums";
-import { Form } from "../components/Form";
+import { Form } from "../components/forms";
 
 export const Signup = () => {
   const dispatch = useDispatch();

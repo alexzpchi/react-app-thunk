@@ -2,9 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
+import { useStyles } from "./styled";
 import * as yup from "yup";
-import { makeStyles } from "@material-ui/core/styles";
-import { FormTypes } from "../utils/enums";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -12,25 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-  rootCard: {
-    minWidth: 275,
-  },
-  button: {
-    marginTop: 20,
-  },
-  errorCredentials: {
-    marginTop: 10,
-    color: "red",
-  },
-});
-
-
-
-export const Form = ({ type, submitHandler }) => {
+export const FormLogin = ({ submitHandler }) => {
   const classes = useStyles();
   const { error } = useSelector((state) => state.auth);
   const history = useHistory();
@@ -39,29 +20,19 @@ export const Form = ({ type, submitHandler }) => {
     username: yup.string("Enter your username").required("Required field"),
     password: yup.string("Enter password").required("Required field"),
   });
-  const validationSchemaSignup = yup.object({
-    username: yup.string("Enter your username").required("Required field"),
-    password: yup.string("Enter password").required("Required field"),
-    email: yup.string("Enter your email").required("Required field")
-  });
-
 
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
-      email: "",
     },
-    validationSchema: type === FormTypes.SIGNUP ? validationSchemaSignup : validationSchemaLogin,
+    validationSchema:
+    validationSchemaLogin,
     onSubmit: (values) => submitHandler(values),
   });
 
   const changeEnterType = () => {
-    if (type === FormTypes.SIGNUP) {
-      history.push("/login");
-    } else {
-      history.push("/signup");
-    }
+    history.push("/signup");
   };
 
   return (
@@ -78,7 +49,7 @@ export const Form = ({ type, submitHandler }) => {
           <Card className={classes.rootCard}>
             <CardContent>
               <Typography variant="h5" component="h2">
-                {type === FormTypes.SIGNUP ? "Sign up" : "Login"}
+                Login
               </Typography>
               <form onSubmit={formik.handleSubmit}>
                 <TextField
@@ -106,19 +77,6 @@ export const Form = ({ type, submitHandler }) => {
                   }
                   helperText={formik.touched.password && formik.errors.password}
                 />
-                {type === FormTypes.SIGNUP && (
-                  <TextField
-                    fullWidth
-                    id="email"
-                    name="email"
-                    label="Email"
-                    type="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
-                  />
-                )}
 
                 <Button
                   className={classes.button}
@@ -136,7 +94,7 @@ export const Form = ({ type, submitHandler }) => {
                   fullWidth
                   onClick={changeEnterType}
                 >
-                  {type === FormTypes.LOGIN ? "Sign up" : "Login"}
+                  Sign Up
                 </Button>
 
                 {error && (

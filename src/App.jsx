@@ -1,12 +1,13 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import {GuardedRoute} from './routeGuard/RouteGuard'
 import { store } from "./store/index.js";
-import { Login } from "./pages/Login";
-import { Signup } from "./pages/Signup";
-import { Header } from "./components/Header";
-import {Users} from "./pages/Users";
+import { Login } from "./pages";
+import { Signup } from "./pages";
+import {Users} from "./pages";
+import { Header } from "./components/header";
+
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Header />
         <Router>
           <Switch>
-            <Route exact path='/' component={Login} /> 
+            <Redirect exact from='/' to='/login' /> 
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
             <GuardedRoute path='/users' component={Users} />
