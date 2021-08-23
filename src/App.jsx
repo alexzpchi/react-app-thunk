@@ -2,11 +2,9 @@ import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import {GuardedRoute} from './routeGuard/RouteGuard'
-import { store } from "./store/index.js";
-import { Login } from "./pages";
-import { Signup } from "./pages";
-import {Users} from "./pages";
-import { Header } from "./components/header";
+import { store } from "./store";
+import { Login, Signup, Users } from "./pages";
+import { Header } from "./components";
 
 
 function App() {

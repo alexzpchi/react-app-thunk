@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { User } from "../components/user";
+import { User } from "../components";
 
 const useStyles = makeStyles((theme) => ({
   listBody: {
