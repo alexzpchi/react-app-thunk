@@ -12,4 +12,7 @@ export const styles = {
         marginTop: 10,
         color: "red",
     },
+    formRow: {
+        marginTop: 20
+    }
 }
